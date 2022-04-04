@@ -109,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				D201A07127FAFD5C00EBBE1C /* README.md */,
+				D201A07B27FBB81000EBBE1C /* detail_screen.png */,
+				D201A07C27FBB81000EBBE1C /* main_screen.png */,
 				D27E680627F8D507001BB576 /* Comix */,
 				D27E681D27F8D508001BB576 /* ComixTests */,
 				D27E682727F8D508001BB576 /* ComixUITests */,
@@ -143,8 +145,6 @@
 				D27E681227F8D508001BB576 /* LaunchScreen.storyboard */,
 				D27E681527F8D508001BB576 /* Info.plist */,
 				D27E686427F98E08001BB576 /* Date+millisecondsSince1970.swift */,
-				D201A07B27FBB81000EBBE1C /* detail_screen.png */,
-				D201A07C27FBB81000EBBE1C /* main_screen.png */,
 			);
 			path = Comix;
 			sourceTree = "<group>";
