@@ -14,11 +14,8 @@ class ComicDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(comic?.title ?? "Title Not set")
-        print("Count of Images: \(comic?.images?.count ?? 0)")
-        print("Count of Text Objects: \(comic?.textObjects.count ?? 0)")
+        
         navigationItem.title = comic?.title
-        // Do any additional setup after loading the view.
         
         if let url = comic?.thumbnail.imageURL(size: .portraitIncredible) {
             do {
@@ -26,7 +23,9 @@ class ComicDetailViewController: UIViewController {
                 let image = UIImage(data: data)
                 imageView.image = image
             }
-            catch {}
+            catch {
+                print(error)
+            }
         }
     }
     
