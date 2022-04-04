@@ -34,6 +34,7 @@ This application uses a UICollectionView as the main view and incorporates a bac
 
 ### MainScreen
 <img src="https://github.com/lewissk/Comix/blob/main/main_screen.png" width=180 align=left>
+
 ### DetailScreen
 <img src="https://github.com/lewissk/Comix/blob/main/detail_screen.png" width=180 align=left>
 
