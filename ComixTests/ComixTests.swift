@@ -17,6 +17,21 @@ class ComixTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testDateWithMilliseconds() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let someDateTime = formatter.date(from: "2016/10/08 22:31:00")
+        assert(someDateTime?.millisecondsSince1970 == 1475987460000)
+    }
+    
+    func testInitialDateWithMilliseconds() {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let someDateTime = formatter.date(from: "1970/01/01 00:00:00")
+        assert(someDateTime?.millisecondsSince1970 == 0)
+    }
 
     func testExample() throws {
         // This is an example of a functional test case.
