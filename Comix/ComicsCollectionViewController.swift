@@ -18,9 +18,10 @@ class ComicsCollectionViewController: UICollectionViewController {
     private let mrc = MarvelRequestController()
     private let LIMIT = 50
     private let imageView = UIImageView(image: UIImage(named: "Logo"))
-    private let portraitRatio: CGFloat = (324/216)
-    private let landscapeRatio: CGFloat = (324/216)
-
+    private let portraitRatio: CGFloat = (225/150)
+    private let landscapeRatio: CGFloat = (140/190)
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -30,20 +31,11 @@ class ComicsCollectionViewController: UICollectionViewController {
             self.results = comicAPIResponse
             self.comics = (comicAPIResponse?.data.results)!
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
                 self.collectionView.reloadData()
             }
         }
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        showImage(false)
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        showImage(true)
-//    }
     
     /// Setup the UI
     private func setupUI() {
@@ -103,12 +95,11 @@ extension ComicsCollectionViewController: ComixCollectionViewLayoutDelegate {
         let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
         let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
         var height = size * landscapeRatio
+        
         if getSize(indexPath) == .portraitXLarge {
             height = size * portraitRatio
         }
         return height
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, imageSizeForComicAtIndexPath indexPath: IndexPath) -> MarvelImageSize {
@@ -175,7 +166,6 @@ extension ComicsCollectionViewController: UICollectionViewDataSourcePrefetching 
                     }
                 }
             }
-            
         }
     }
 }

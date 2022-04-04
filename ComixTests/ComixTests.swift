@@ -9,9 +9,12 @@ import XCTest
 @testable import Comix
 
 class ComixTests: XCTestCase {
+    var sut: ComicsCollectionViewController!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = ComicsCollectionViewController()
+        sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws {
@@ -46,6 +49,10 @@ class ComixTests: XCTestCase {
         self.measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testVC() throws {
+        sut.collectionView(<#T##collectionView: UICollectionView##UICollectionView#>, heightForComicAtIndexPath: <#T##IndexPath#>)
     }
 
 }

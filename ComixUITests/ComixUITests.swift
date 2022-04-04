@@ -28,11 +28,6 @@ class ComixUITests: XCTestCase {
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let collectionViewsQuery = XCUIApplication().collectionViews
-        collectionViewsQuery.children(matching: .cell).element(boundBy: 7).children(matching: .other).element.swipeUp()
-        collectionViewsQuery.children(matching: .cell).element(boundBy: 9).children(matching: .other).element.swipeUp()
-        collectionViewsQuery.children(matching: .cell).element(boundBy: 5).children(matching: .other).element.tap()
                 
     }
 

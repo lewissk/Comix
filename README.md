@@ -15,6 +15,7 @@ This application uses a UICollectionView as the main view and incorporates a bac
  - Add accessibility
  - Add localized strings
  - Add Analytics
+ - Add more tests
 
 ### Libraries Used
 #### Internal
@@ -28,5 +29,13 @@ This application uses a UICollectionView as the main view and incorporates a bac
  - [Creating a Collection View Inspired by Pinterest](http://www.shanirivers.com/blog/2018-08-05-creating-collection-view-pinterest/)
  - [How To Build Resizing Image In Navigation Bar With Large Title](https://www.uptech.team/blog/build-resizing-image-in-navigation-bar-with-large-title)
  - [Asynchronously Loading Images into Table and Collection Views](https://developer.apple.com/documentation/uikit/views_and_controls/table_views/asynchronously_loading_images_into_table_and_collection_views)
+ 
+## Images of the app
+
+### MainScreen
+![Main Screen](main_screen.png)
+
+### DetailScreen
+![Detail Screen](detail_screen.png)
  
 
