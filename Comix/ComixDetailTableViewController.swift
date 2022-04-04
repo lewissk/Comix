@@ -1,5 +1,5 @@
 //
-//  ComicDetailViewController.swift
+//  ComixDetailTableViewController.swift
 //  Comix
 //
 //  Created by Scott Lewis on 4/4/22.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ComicDetailViewController: UIViewController {
-    
+class ComixDetailTableViewController: UITableViewController {
     var comic: MarvelComicResult?
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,7 @@ class ComicDetailViewController: UIViewController {
                 let data = try Data(contentsOf: url)
                 let image = UIImage(data: data)
                 imageView.image = image
+                titleLabel.text = comic?.title
             }
             catch {
                 print(error)
@@ -29,15 +30,13 @@ class ComicDetailViewController: UIViewController {
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // Hide Headers and Footers
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
     }
-    */
+ 
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
 
 }

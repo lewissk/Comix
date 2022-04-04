@@ -18,6 +18,8 @@ class ComicsCollectionViewController: UICollectionViewController {
     private let mrc = MarvelRequestController()
     private let LIMIT = 50
     private let imageView = UIImageView(image: UIImage(named: "Logo"))
+    private let portraitRatio: CGFloat = (324/216)
+    private let landscapeRatio: CGFloat = (324/216)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,20 +35,25 @@ class ComicsCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        showImage(false)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        showImage(true)
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        showImage(false)
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        showImage(true)
+//    }
     
+    /// Setup the UI
     private func setupUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         title = "Comics"
+        
+        if let layout = collectionView?.collectionViewLayout as? ComixCollectionViewLayout {
+            layout.delegate = self
+        }
 
         // Initial setup for image for Large NavBar state since the the screen always has Large NavBar once it gets opened
         guard let navigationBar = self.navigationController?.navigationBar else { return }
@@ -74,7 +81,7 @@ class ComicsCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == DETAIL_SEGUE_IDENTIFER,
-           let destination = segue.destination as? ComicDetailViewController,
+           let destination = segue.destination as? ComixDetailTableViewController,
            let makeIndex = collectionView.indexPathsForSelectedItems?.first {
             destination.comic = comics[makeIndex.item]
         }
@@ -89,9 +96,28 @@ class ComicsCollectionViewController: UICollectionViewController {
     }
 }
 
+extension ComicsCollectionViewController: ComixCollectionViewLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForComicAtIndexPath indexPath: IndexPath) -> CGFloat
+    {
+        let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
+        let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
+        let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
+        var height = size * landscapeRatio
+        if getSize(indexPath) == .portraitXLarge {
+            height = size * portraitRatio
+        }
+        return height
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, imageSizeForComicAtIndexPath indexPath: IndexPath) -> MarvelImageSize {
+        return getSize(indexPath)
+    }
+}
+
 extension ComicsCollectionViewController {
     
-
     /// Show or hide the image from NavBar while going to next screen or back to initial screen
     ///
     /// - Parameter show: show or hide the image from NavBar
@@ -136,24 +162,12 @@ extension ComicsCollectionViewController {
     }
 }
 
-extension ComicsCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
-        let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
-        let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
-        return CGSize(width: size, height: size)
-    }
-}
-
 extension ComicsCollectionViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print("Prefetch: \(indexPaths)")
         if let maxPath = indexPaths.max(), let results = self.results {
             if maxPath.row > comics.count - 10 {
-                print("get more now, offset: \(results.data.offset) limit: \(results.data.limit)")
                 mrc.fetchComics (offset: results.data.offset + results.data.count + 1, limit: LIMIT){ comicAPIResponse in
                     self.results = comicAPIResponse
-                    print("comicAPIResponse offset: \(comicAPIResponse?.data.offset ?? 0), limit: \(comicAPIResponse?.data.limit ?? 0)")
                     guard let moreComics = comicAPIResponse?.data.results else { return }
                     self.comics.append(contentsOf: moreComics)
                     DispatchQueue.main.async {
@@ -176,7 +190,7 @@ extension ComicsCollectionViewController {
         if let cachedImage = self.cache.object(forKey: itemNumber) {
             cell.imageView.image = cachedImage
         } else {
-            self.loadImage (comic: comics[indexPath.row]){ [weak self] (image) in
+            self.loadImage (comic: comics[indexPath.row], for: indexPath){ [weak self] (image) in
                 guard let self = self, let image = image else { return }
                 cell.imageView.image = image
                 self.cache.setObject(image, forKey: itemNumber)
@@ -184,9 +198,10 @@ extension ComicsCollectionViewController {
         }
     }
 
-    private func loadImage(comic: MarvelComicResult, completion: @escaping (UIImage?) -> ()) {
-        utilityQueue.async {
-            if let url = comic.thumbnail.imageURL(size: .standardLarge) {
+    private func loadImage(comic: MarvelComicResult, for indexPath: IndexPath, completion: @escaping (UIImage?) -> ()) {
+        utilityQueue.async { [self] in
+            let imageSize = getSize(indexPath)
+            if let url = comic.thumbnail.imageURL(size: imageSize) {
                 do {
                     let data = try Data(contentsOf: url)
                     let image = UIImage(data: data)
@@ -197,6 +212,14 @@ extension ComicsCollectionViewController {
                     print(error)
                 }
             }
+        }
+    }
+    
+    private func getSize(_ indexPath: IndexPath) -> MarvelImageSize {
+        if indexPath.row % 3 == 0 {
+            return .landscapeLarge
+        } else {
+            return .portraitXLarge
         }
     }
 }
