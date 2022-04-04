@@ -33,9 +33,9 @@ This application uses a UICollectionView as the main view and incorporates a bac
 ## Images of the app
 
 ### MainScreen
-![Main Screen](main_screen.png)
+![Main Screen](main_screen.png | width=100)
 
 ### DetailScreen
-![Detail Screen](detail_screen.png)
+![Detail Screen](detail_screen.png | width=100)
  
 
