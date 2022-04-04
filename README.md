@@ -33,11 +33,10 @@ This application uses a UICollectionView as the main view and incorporates a bac
 ## Images of the app
 
 ### MainScreen
-<img src="https://github.com/lewissk/Comix/blob/main/main_screen.png" width=100 align=left>
-<img src="https://github.com/lewissk/Comix/blob/main/detail_screen.png" width=100 align=right>
-![Main Screen](main_screen.png | width=100)
-
+<img src="https://github.com/lewissk/Comix/blob/main/main_screen.png" width=180 align=left>
 ### DetailScreen
-![Detail Screen](detail_screen.png | width=100)
+<img src="https://github.com/lewissk/Comix/blob/main/detail_screen.png" width=180 align=left>
+
+
  
 
