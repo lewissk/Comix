@@ -5,7 +5,7 @@ This project uses the Marvel API to pull a list of comics and display their cove
 
 ## Considerations
 ### Architectural Choices
-This application uses a UICollectionView as the main view and incorporates a background loading caching queue to allow for more performant scrolling and the UICollectionViewDataSourcePrefetching protocol to allow the application to fetch more data when the user is getting to the end of the list. The UICollectionView uses a custom UICollectionViewCell and a custom UICollectionViewLayout
+This application uses a UICollectionView as the main view and incorporates a background loading caching queue to allow for more performant scrolling and the UICollectionViewDataSourcePrefetching protocol to allow the application to fetch more data when the user is getting to the end of the list. The UICollectionView uses a custom UICollectionViewCell and a custom UICollectionViewLayout. The app uses both UIKit and SwiftUI.
 
 ### Things that need to change
  - The image caching needs to be improved so that it uses some disk caching instead of just using memory cache
@@ -16,6 +16,7 @@ This application uses a UICollectionView as the main view and incorporates a bac
  - Add localized strings
  - Add Analytics
  - Add more tests
+ - More testing in general
 
 ### Libraries Used
 #### Internal

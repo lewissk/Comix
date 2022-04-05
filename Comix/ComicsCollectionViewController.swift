@@ -73,11 +73,7 @@ class ComicsCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == DETAIL_SEGUE_IDENTIFER,
-           let destination = segue.destination as? ComixDetailTableViewController,
-           let makeIndex = collectionView.indexPathsForSelectedItems?.first {
-            destination.comic = comics[makeIndex.item]
-        } else if segue.identifier == "ShowDetailSwiftUI",
+        if segue.identifier == "ShowDetailSwiftUI",
                   let destination = segue.destination as? ComicDetailHostingController,
                   let makeIndex = collectionView.indexPathsForSelectedItems?.first {
             destination.rootView.comic = comics[makeIndex.item]

@@ -14,6 +14,11 @@ class ComicDetailHostingController: UIHostingController<DetailSwiftUIView> {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder, rootView: DetailSwiftUIView())
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "Comic Detail"
+    }
 }
 
 struct DetailSwiftUIView: View {
