@@ -75,13 +75,13 @@ struct MarvelCharacters: Codable {
     var items: [MarvelResource]
 }
 
-struct MarvelTextObject: Codable {
+struct MarvelTextObject: Codable, Hashable {
     var type: String
     var language: String
     var text: String
 }
 
-struct MarvelCreator: Codable {
+struct MarvelCreator: Codable, Hashable {
     var resourceURI: String
     var name: String
     var role: String
@@ -90,11 +90,11 @@ struct MarvelCreator: Codable {
 struct MarvelCreators: Codable {
     var available: Int
     var collectionURI: String
-    var Items: [MarvelCreator]?
+    var items: [MarvelCreator]?
     var returned: Int
 }
 
-struct MarvelResource: Codable {
+struct MarvelResource: Codable, Hashable {
     var resourceURI: String
     var name: String
 }

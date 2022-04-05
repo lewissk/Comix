@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ComicsCollectionViewController: UICollectionViewController {
     
@@ -76,6 +77,10 @@ class ComicsCollectionViewController: UICollectionViewController {
            let destination = segue.destination as? ComixDetailTableViewController,
            let makeIndex = collectionView.indexPathsForSelectedItems?.first {
             destination.comic = comics[makeIndex.item]
+        } else if segue.identifier == "ShowDetailSwiftUI",
+                  let destination = segue.destination as? ComicDetailHostingController,
+                  let makeIndex = collectionView.indexPathsForSelectedItems?.first {
+            destination.rootView.comic = comics[makeIndex.item]
         }
     }
     

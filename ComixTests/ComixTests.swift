@@ -52,7 +52,7 @@ class ComixTests: XCTestCase {
     }
     
     func testVC() throws {
-        sut.collectionView(<#T##collectionView: UICollectionView##UICollectionView#>, heightForComicAtIndexPath: <#T##IndexPath#>)
+//        sut.collectionView(<#T##collectionView: UICollectionView##UICollectionView#>, heightForComicAtIndexPath: <#T##IndexPath#>)
     }
 
 }
