@@ -1,3 +1,4 @@
+![App Icon](Comix/Assets.xcassets/Logo.imageset/icon_40pt%403x.png)
 #  Comic List
 
 ## Overview
