@@ -32,19 +32,10 @@ This application uses a UICollectionView as the main view and incorporates a bac
  
 ## Images of the app
 
-| ![Main Screen](https://blog-assets.thedyrt.com/uploads/2019/01/shutterstock_1033306540-1.jpg) | ![Detail Screen](https://github.com/lewissk/Comix/blob/main/detail_screen.png) |
+| ![Main Screen](https://github.com/lewissk/Comix/blob/main/main_screen.png) | ![Detail Screen](https://github.com/lewissk/Comix/blob/main/detail_screen.png) |
 |:--:|:--:|
-| <b>Main Screen</b>|) | <b>Detail Screen</b>|) |
+| <b>Main Screen</b> | <b>Detail Screen</b> |
 
 
-
-<figure>
-  <img src="https://github.com/lewissk/Comix/blob/main/main_screen.png" width=180 align=left>
-  <figcaption align="center"><b>Main Screen</b></figcaption>
-</figure>
-<figure>
-  <img src="https://github.com/lewissk/Comix/blob/main/detail_screen.png" width=180 align=left>
-  <figcaption align="center"><b>Detail Screen</b></figcaption>
-</figure>
  
 
